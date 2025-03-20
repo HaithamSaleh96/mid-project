@@ -3,6 +3,8 @@ const { register, login } = require('../controllers/AuthController');
 const { createPost, getAllPosts, getPostById, getMyPosts, updatePost, deletePost } = require('../controllers/postController');
 const { getAllUsers, createUser, updateUser, deleteUser, AdmingetAllPosts, AdmingetPostById, AdminupdatePost,AdmindeletePost,unblockUser } = require('../controllers/adminController');
 const { sendTestEmail } = require('../controllers/emailController');
+const { deleteUserLis } = require('../listeners/SendEmailListener');
+
 
 const verifyToken = require('../middlewares/authMiddleware');
 const isOwnerOrAdmin = require('../middlewares/isOwnerOrAdmin');
@@ -37,7 +39,9 @@ router.put('/admin/posts/:id', verifyToken, isAdmin, AdminupdatePost);
 router.delete('/admin/posts/:id', verifyToken, isAdmin, AdmindeletePost);
 
 
-router.post('/send-email', sendTestEmail);
+// router.post('/send-email', sendTestEmail);
+
+// router.post('/delete', deleteUserLis);
 
 
 module.exports = router;

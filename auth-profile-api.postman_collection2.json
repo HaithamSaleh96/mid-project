@@ -13,7 +13,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"name\": \"1\",\r\n  \"email\": \"1\",\r\n  \"password\": \"123456\"\r\n}\r\n",
+					"raw": "{\r\n  \"name\": \"33\",\r\n  \"email\": \"33\",\r\n  \"password\": \"123456\"\r\n}\r\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -43,7 +43,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n \"email\": \"1\",\r\n  \"password\": \"123456\"\r\n}\r\n",
+					"raw": "{\r\n \"email\":\"john@exampsadbasle2.com\", \r\n \"password\":\"123456\"\r\n}\r\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -325,7 +325,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZGI1MzEwNGJlYTBjMzllZDA2NDI5NiIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzQyNDI2OTExLCJleHAiOjE3NDI0MzA1MTF9.FLR_AGPBkrP-MiysG8Hj2NqsW7lz7CzlqYTLX28X2X8",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZGFlMzEyNjY0YmRiZDMzYTAwYmExYyIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc0MjQ5ODgyMSwiZXhwIjoxNzQyNTAyNDIxfQ.S5hRQ2YfSqeVm7983SmRyCnEIe9ebvVhHO3KL2NDh-Y",
 						"type": "text"
 					}
 				],
@@ -352,13 +352,13 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZGI1MzEwNGJlYTBjMzllZDA2NDI5NiIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzQyNDI3NTk3LCJleHAiOjE3NDI0MzExOTd9.nsVlf6vtsOQ001uemyM_fQa8yI_SvGP-MxKeRYPZ7mk",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZGFmNDZiMzBiNTEyYTYyNTYxMWE0ZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc0MjQ5NjQ1MiwiZXhwIjoxNzQyNTAwMDUyfQ.lAb30LZYhvuO2QfKrwcrmVo8Ta5XePbAMBQyz5eZTZs",
 						"type": "text"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\":\"testadmin\",\r\n    \"email\":\"testadmin@gmail.com\", \r\n    \"password\":\"123456\",\r\n    \"role\":\"user\" \r\n}",
+					"raw": "{\r\n    \"name\":\"testadmin\",\r\n    \"email\":\"Adnmintt@Admin.com\", \r\n    \"password\":\"123456\",\r\n    \"role\":\"admin\" \r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -388,13 +388,13 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZGI1MzEwNGJlYTBjMzllZDA2NDI5NiIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzQyNDI2OTExLCJleHAiOjE3NDI0MzA1MTF9.FLR_AGPBkrP-MiysG8Hj2NqsW7lz7CzlqYTLX28X2X8",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZGFlMzEyNjY0YmRiZDMzYTAwYmExYyIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc0MjQ5ODgyMSwiZXhwIjoxNzQyNTAyNDIxfQ.S5hRQ2YfSqeVm7983SmRyCnEIe9ebvVhHO3KL2NDh-Y",
 						"type": "text"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\":\"testupdateadmin\", \r\n    \"email\":\"testupdateadmin\",\r\n     \"role\":\"admin\" \r\n}",
+					"raw": "{\r\n    \"name\":\"Repo\", \r\n    \"email\":\"Repo\",\r\n     \"role\":\"admin\" \r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -402,7 +402,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:5000/api/users/users/67db556b764142457757590c",
+					"raw": "http://localhost:5000/api/users/users/67d9c750a84a2bdc404b4c35",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -412,7 +412,7 @@
 						"api",
 						"users",
 						"users",
-						"67db556b764142457757590c"
+						"67d9c750a84a2bdc404b4c35"
 					]
 				}
 			},
@@ -425,7 +425,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZGFmNDZiMzBiNTEyYTYyNTYxMWE0ZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc0MjQyNjg2NCwiZXhwIjoxNzQyNDMwNDY0fQ.x5mrxflk5h1vF0O8HqzvWf7KNZ17SzOYSFteMMu0x5E",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZGFlMzEyNjY0YmRiZDMzYTAwYmExYyIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc0MjQ5ODgyMSwiZXhwIjoxNzQyNTAyNDIxfQ.S5hRQ2YfSqeVm7983SmRyCnEIe9ebvVhHO3KL2NDh-Y",
 						"type": "text"
 					}
 				],
@@ -439,7 +439,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:5000/api/users/users/67db5e5243af1591be593bce",
+					"raw": "http://localhost:5000/api/users/users/67db53104bea0c39ed064296",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -449,7 +449,7 @@
 						"api",
 						"users",
 						"users",
-						"67db5e5243af1591be593bce"
+						"67db53104bea0c39ed064296"
 					]
 				}
 			},
@@ -645,36 +645,6 @@
 						"admin",
 						"posts",
 						"67db5d7fb2e5ac4991675f9d"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "SendEmail",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"to\": \"karamomari20112001@gmail.com\",\r\n    \"subject\": \"Hello from Infobip\",\r\n    \"text\": \"This is a test email.\"\r\n}\r\n",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:5000/api/users/send-email",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "5000",
-					"path": [
-						"api",
-						"users",
-						"send-email"
 					]
 				}
 			},

@@ -5,6 +5,9 @@ const cors = require('cors');
 
 const app = express();
 
+//on listener
+require('./listeners/SendEmailListener');
+
 // Middleware
 app.use(cors());
 app.use(express.json());
