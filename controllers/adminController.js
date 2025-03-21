@@ -3,29 +3,77 @@ const Post = require('../models/Post');
 const LoginAttempt = require('../models/LoginAttempt');
 const SendEmail = require('../events/SendEmail');
 const adminRepository = require('../repositories/AdminRepository');
+const bcrypt = require('bcrypt');
 
 
 
 
 // عرض جميع المستخدمين
+// exports.getAllUsers = async (req, res) => {
+//     try {
+//         const users = await User.find();
+//         res.json(users);
+//     } catch (error) {
+//         console.log(error);
+//         res.status(500).json({ message: 'Server error' });
+//     }
+// }
+
+
+
+
+// عرض جميع المستخدمين بالريبزتري
 exports.getAllUsers = async (req, res) => {
     try {
-        const users = await User.find();
+        const users = await adminRepository.getAllUsers();
         res.json(users);
     } catch (error) {
         console.log(error);
-        res.status(500).json({ message: 'Server error' });
+        res.status(error.statusCode || 500).json({ message: error.message || 'Server error' });
     }
-}
-
-
+};
 
 
 // إضافة مستخدم جديد
+// exports.createUser = async (req, res) => {
+//     try {
+//         const { name, email, password, role } = req.body;
+
+
+//         const validRoles = ['user', 'admin'];
+//         if (!validRoles.includes(role)) {
+//             return res.status(400).json({ message: 'Invalid role. Role must be either "user" or "admin".' });
+//         }
+
+//         // تحقق من عدم وجود مستخدم بنفس البريد الإلكتروني
+//         const existingUser = await User.findOne({ email });
+//         if (existingUser) {
+//             return res.status(400).json({ message: 'User already exists' });
+//         }
+ 
+//         const isActive=true;
+//         const salt = await bcrypt.genSalt(10);
+//         const hashedPassword = await bcrypt.hash(password, salt);
+
+//         const user = new User({ name, email, password: hashedPassword, role, isActive });
+
+//         await user.save();
+//         SendEmail.emit('SendEmail', user.email, "wellcome to ....");
+
+//         res.status(201).json({ message: 'User created successfully', user });
+//     } catch (error) {
+//         console.log(error);
+//         res.status(500).json({ message: 'Server error' });
+//     }
+// };
+
+
+
+
+// إضافة مستخدم جديد بالريبوزتري
 exports.createUser = async (req, res) => {
     try {
         const { name, email, password, role } = req.body;
-
 
         const validRoles = ['user', 'admin'];
         if (!validRoles.includes(role)) {
@@ -33,21 +81,30 @@ exports.createUser = async (req, res) => {
         }
 
         // تحقق من عدم وجود مستخدم بنفس البريد الإلكتروني
-        const existingUser = await User.findOne({ email });
+        const existingUser = await adminRepository.getUserByEmail(email);
         if (existingUser) {
             return res.status(400).json({ message: 'User already exists' });
         }
- 
-        const isActive=true;
 
-        const user = new User({ name, email, password, role, isActive});
-        await user.save();
-        SendEmail.emit('SendEmail', user.email, "wellcome to ....");
+        const isActive = true;
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(password, salt);
+
+        const user = {
+            name,
+            email,
+            password: hashedPassword,
+            role,
+            isActive,
+        };
+
+        await adminRepository.createUser(user);
+        SendEmail.emit('SendEmail', user.email, "Welcome to ....");
 
         res.status(201).json({ message: 'User created successfully', user });
     } catch (error) {
         console.log(error);
-        res.status(500).json({ message: 'Server error' });
+        res.status(error.statusCode || 500).json({ message: error.message || 'Server error' });
     }
 };
 
@@ -55,6 +112,35 @@ exports.createUser = async (req, res) => {
 
 
 // // تعديل بيانات مستخدم
+// exports.updateUser = async (req, res) => {
+//     try {
+//         const { name, email, role } = req.body;
+
+//         const validRoles = ['user', 'admin'];
+//         if (!validRoles.includes(role)) {
+//             return res.status(400).json({ message: 'Invalid role. Role must be either "user" or "admin".' });
+//         }
+//         const user = await User.findById(req.params.id);
+
+//         if (!user) return res.status(404).json({ message: 'User not found' });
+
+//         user.name = name || user.name;
+//         user.email = email || user.email;
+//         user.role = role || user.role;
+
+//         await user.save();
+
+//         SendEmail.emit('SendEmail', user.email, "your account is update by Admin review account");
+//         res.json({ message: 'User updated successfully', user });
+//     } catch (error) {
+//         console.log(error);
+//         res.status(500).json({ message: 'Server error' });
+//     }
+// };
+
+
+
+// // تعديل بيانات مستخدم بالريبوزتري
 exports.updateUser = async (req, res) => {
     try {
         const { name, email, role } = req.body;
@@ -63,26 +149,16 @@ exports.updateUser = async (req, res) => {
         if (!validRoles.includes(role)) {
             return res.status(400).json({ message: 'Invalid role. Role must be either "user" or "admin".' });
         }
-        const user = await User.findById(req.params.id);
 
-        if (!user) return res.status(404).json({ message: 'User not found' });
+        const updatedUser = await adminRepository.updateUser(req.params.id, { name, email, role });
 
-        user.name = name || user.name;
-        user.email = email || user.email;
-        user.role = role || user.role;
+        SendEmail.emit('SendEmail', updatedUser.email, "Your account has been updated by the admin. Please review your account.");
+        res.json({ message: 'User updated successfully', user: updatedUser });
 
-        await user.save();
-
-        SendEmail.emit('SendEmail', user.email, "your account is update by Admin review account");
-        res.json({ message: 'User updated successfully', user });
     } catch (error) {
-        console.log(error);
-        res.status(500).json({ message: 'Server error' });
+        res.status(error.statusCode || 500).json({ message: error.message || 'Server error' });
     }
 };
-
-
-
 
 
 

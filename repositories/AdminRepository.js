@@ -1,4 +1,4 @@
-// repositories/UserRepository.js
+// repositories/AdminRepository.js
 const User = require('../models/User');
 const CustomError = require('../errors/CustomError');
 
@@ -24,10 +24,9 @@ class AdminRepository {
     async getUserByEmail(email) {
         try {
             const user = await User.findOne({ email });
-            if (!user) throw new CustomError('User not found by email', 404);
-            return user;
+            return user || null;
         } catch (error) {
-            throw new CustomError(error.message || 'Error retrieving user by email', error.statusCode || 500);
+            throw new CustomError(error.message || 'Error fetching user by email', 500);
         }
     }
 
@@ -42,31 +41,37 @@ class AdminRepository {
 
     async updateUser(id, data) {
         try {
-            const user = await User.findById(id);
+            const user = await this.getUserById(id);
             if (!user) throw new CustomError('User not found', 404);
-
+    
             user.name = data.name || user.name;
             user.email = data.email || user.email;
             user.role = data.role || user.role;
-
+    
             await user.save();
-
+    
             return user;
         } catch (error) {
+            // إذا كان الخطأ نفسه يحمل statusCode، استخدمه، وإلا استخدم خطأ جديد
+            if (error instanceof CustomError) throw error;
             throw new CustomError(error.message, 500);
         }
     }
+    
 
 
     async deleteUser(id) {
         try {
-            const user = await User.findByIdAndDelete(id);
+            const user = await this.getUserById(id);
             if (!user) throw new CustomError('User not found', 404);
-            return user;
+    
+            await user.remove(); 
+            return { message: 'User deleted successfully' };
         } catch (error) {
             throw new CustomError(error.message || 'Error deleting user', error.statusCode || 500);
         }
     }
+    
 }
 
 module.exports = new AdminRepository();
