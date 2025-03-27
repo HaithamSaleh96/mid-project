@@ -1,5 +1,5 @@
 const Post = require('../models/Post');
-const CustomError = require('../utils/CustomError');
+const CustomError = require('../errors/CustomError');
 
 class PostRepository {
     // إنشاء بوست جديد
@@ -53,6 +53,16 @@ class PostRepository {
             throw new CustomError(error.message || 'Error deleting post', error.statusCode || 500);
         }
     }
+
+    //بوستاته الخاصه
+    async getPostsByUserId(userId) {
+        try {
+            return await Post.find({ author: userId }).populate('author', 'name');
+        } catch (error) {
+            throw new CustomError(error.message || 'Error fetching user posts', 500);
+        }
+    }
+
 }
 
 module.exports = new PostRepository();

@@ -13,7 +13,7 @@ app.use(cors());
 app.use(express.json());
 
 // Routes
-app.use('/api/users', require('./routes/userRoutes'));
+app.use('/api', require('./routes/userRoutes'));
 
 
 //connection database

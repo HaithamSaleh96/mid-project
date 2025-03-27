@@ -1,5 +1,5 @@
 const LoginAttempt = require('../models/LoginAttempt');
-const CustomError = require('../utils/CustomError');
+const CustomError = require('../errors/CustomError');
 
 class LoginAttemptRepository {
     // إنشاء محاولة تسجيل دخول جديدة
